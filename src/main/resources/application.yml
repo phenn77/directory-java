@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  data:
+    jdbc:
+      repositories:
+        enabled: false
+  main:
+    allow-circular-references: true
+
+token:
+  private-key: 413F4428472B4B6250655368566D5970337336763979244226452948404D6351
+  expiry-time: 86400000
+  secret-key: abcdef
+
