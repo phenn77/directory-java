@@ -2,8 +2,8 @@ package com.training.directory.service.impl.authentication;
 
 import com.training.directory.exception.BusinessException;
 import com.training.directory.middleware.CredentialManager;
-import com.training.directory.model.request.LoginRequest;
-import com.training.directory.model.response.LoginResponse;
+import com.training.directory.dao.request.LoginRequest;
+import com.training.directory.dao.response.LoginResponse;
 import com.training.directory.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

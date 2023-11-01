@@ -25,13 +25,11 @@ public class CredentialManager {
     @Value("${token.expiry-time}")
     private String expiryTime;
 
-    @Value("${token.secret-key}")
-    private String jwtSecretKey;
-
     public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("secretKey", jwtSecretKey);
         claims.put("role", user.getRole());
+        claims.put("userId", user.getId());
+        claims.put("email", user.getEmail());
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -42,7 +40,7 @@ public class CredentialManager {
     }
 
     private Key getSignKey() {
-        byte[] keyBytes= Decoders.BASE64.decode(jwtPrivateKey);
+        byte[] keyBytes = Decoders.BASE64.decode(jwtPrivateKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 

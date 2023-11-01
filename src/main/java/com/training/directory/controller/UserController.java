@@ -1,14 +1,12 @@
 package com.training.directory.controller;
 
-import com.training.directory.model.request.LoginRequest;
-import com.training.directory.model.request.SignUpRequest;
-import com.training.directory.model.response.LoginResponse;
-import com.training.directory.model.response.ResponseBody;
-import com.training.directory.service.AuthenticationService;
+import com.training.directory.annotation.Authorized;
+import com.training.directory.model.User;
 import com.training.directory.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,8 +15,9 @@ public class UserController {
 
     private final UserService userService;
 
-//    @GetMapping("me")
-//    public UserDetails login() {
-//        return
-//    }
+    @Authorized
+    @GetMapping("me")
+    public User login() {
+        return userService.getProfile();
+    }
 }

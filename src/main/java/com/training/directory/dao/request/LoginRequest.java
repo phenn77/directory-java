@@ -1,6 +1,4 @@
-package com.training.directory.model.request;
-
-import com.training.directory.model.response.LoginResponse;
+package com.training.directory.dao.request;
 
 import java.util.Objects;
 

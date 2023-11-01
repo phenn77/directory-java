@@ -1,4 +1,4 @@
-package com.training.directory.model.request;
+package com.training.directory.dao.request;
 
 import java.sql.Date;
 import java.util.Objects;

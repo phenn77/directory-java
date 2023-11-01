@@ -1,4 +1,4 @@
-package com.training.directory.model.response;
+package com.training.directory.dao.response;
 
 public record LoginResponse(String token) {
 }

@@ -1,4 +1,4 @@
-package com.training.directory.model.response;
+package com.training.directory.dao.response;
 
 import com.training.directory.constant.Status;
 import lombok.Data;
