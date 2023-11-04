@@ -1,37 +1,48 @@
 package com.training.directory.service.impl.authentication;
 
+import com.training.directory.constant.Status;
+import com.training.directory.dao.request.LoginRequest;
+import com.training.directory.dao.response.ResponseBody;
 import com.training.directory.exception.BusinessException;
 import com.training.directory.middleware.CredentialManager;
-import com.training.directory.dao.request.LoginRequest;
-import com.training.directory.dao.response.LoginResponse;
 import com.training.directory.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class SignInServiceImpl {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private final AuthenticationManager authenticationManager;
     private final CredentialManager credentialManager;
     private final UserRepository userRepository;
-    private final AuthenticationManager authenticationManager;
 
-    public LoginResponse signIn(LoginRequest request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username(), request.password()));
+    public ResponseBody signIn(LoginRequest request) {
 
-        var user = userRepository.findByUsername(request.username())
-                .orElseThrow(() -> {
-                    logger.error("Invalid username. Username: {}", request.username());
-                    return new BusinessException("Invalid username.");
-                });
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username(), request.password()));
 
-        var jwt = credentialManager.generateToken(user);
+            var user = userRepository.findByUsername(request.username())
+                    .orElseThrow(() -> {
+                        logger.error("Invalid username. Username: {}", request.username());
+                        return new BusinessException("Invalid username.");
+                    });
 
-        return new LoginResponse(jwt);
+            var token = credentialManager.generateToken(user);
+
+            return new ResponseBody(Status.SUCCESS, StringUtils.EMPTY, Map.of("token", token));
+
+        } catch (AuthenticationException e) {
+            throw new BusinessException("User not found.");
+        }
     }
 }

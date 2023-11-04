@@ -1,7 +1,7 @@
 package com.training.directory.controller;
 
 import com.training.directory.annotation.Authorized;
-import com.training.directory.model.User;
+import com.training.directory.dao.response.ResponseBody;
 import com.training.directory.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ public class UserController {
 
     @Authorized
     @GetMapping("me")
-    public User login() {
+    public ResponseBody login() {
         return userService.getProfile();
     }
 }

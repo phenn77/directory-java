@@ -2,7 +2,6 @@ package com.training.directory.controller;
 
 import com.training.directory.dao.request.LoginRequest;
 import com.training.directory.dao.request.SignUpRequest;
-import com.training.directory.dao.response.LoginResponse;
 import com.training.directory.dao.response.ResponseBody;
 import com.training.directory.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +18,7 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("login")
-    public LoginResponse login(@RequestBody LoginRequest request) {
+    public ResponseBody login(@RequestBody LoginRequest request) {
         return authenticationService.signIn(request);
     }
 

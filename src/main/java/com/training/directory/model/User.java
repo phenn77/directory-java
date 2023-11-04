@@ -1,5 +1,6 @@
 package com.training.directory.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.training.directory.constant.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -39,10 +40,11 @@ public class User extends BaseEntity implements UserDetails  {
     @Column(unique = true)
     private String username;
 
+    @JsonIgnore
     @NotNull
     private String password;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Image profilePicture;
 
     @Enumerated(EnumType.STRING)
@@ -53,21 +55,25 @@ public class User extends BaseEntity implements UserDetails  {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return Boolean.TRUE;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return Boolean.TRUE;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return Boolean.TRUE;
     }
 
+    @JsonIgnore
     @Override
     public boolean isEnabled() {
         return Boolean.TRUE;

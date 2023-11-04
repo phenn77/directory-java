@@ -3,12 +3,13 @@ package com.training.directory.service.impl.authentication;
 import com.training.directory.constant.ApplicationConstant;
 import com.training.directory.constant.Role;
 import com.training.directory.constant.Status;
-import com.training.directory.exception.BusinessException;
-import com.training.directory.model.User;
 import com.training.directory.dao.request.SignUpRequest;
 import com.training.directory.dao.response.ResponseBody;
+import com.training.directory.exception.BusinessException;
+import com.training.directory.model.User;
 import com.training.directory.repository.UserRepository;
 import com.training.directory.util.ApplicationUtil;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -16,15 +17,12 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 @Service
+@RequiredArgsConstructor
 public class SignUpServiceImpl {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final UserRepository userRepository;
-
-    public SignUpServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public ResponseBody signUp(SignUpRequest request) {
         var existingUser = userRepository.findByUsernameOrEmail(request.username(), request.email());
@@ -48,6 +46,6 @@ public class SignUpServiceImpl {
 
         userRepository.save(user);
 
-        return new ResponseBody(Status.SUCCESS, "User creation success.");
+        return new ResponseBody(Status.SUCCESS, "User creation success.", null);
     }
 }
