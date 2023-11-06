@@ -6,7 +6,7 @@ import org.springframework.http.HttpMethod;
 
 public interface AuditService {
 
-    void auditData(HttpMethod method, ModelType model, String modelId, Object previousData, Object currentData);
+    void auditData(String user, HttpMethod method, ModelType model, String modelId, Object previousData, Object currentData);
 
-    ResponseBody retrieveAuditData(String model, String modelId);
+    ResponseBody retrieveAuditData(ModelType model, String modelId);
 }

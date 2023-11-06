@@ -20,9 +20,9 @@ public class Audit extends BaseEntity {
 
     private String modelId;
 
-    @Column(columnDefinition = "text")
-    private String previousData;
+    private transient Object previousData;
 
-    @Column(columnDefinition = "text")
-    private String currentData;
+    private transient Object currentData;
+
+    private transient Object difference;
 }

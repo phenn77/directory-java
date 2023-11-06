@@ -1,5 +1,6 @@
 package com.training.directory.controller;
 
+import com.training.directory.dao.request.ForgotPasswordRequest;
 import com.training.directory.dao.request.LoginRequest;
 import com.training.directory.dao.request.SignUpRequest;
 import com.training.directory.dao.response.ResponseBody;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/")
+@RequestMapping("/auth")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
@@ -25,5 +26,10 @@ public class AuthenticationController {
     @PostMapping("signup")
     public ResponseBody signUp(@RequestBody SignUpRequest request) {
         return authenticationService.signUp(request);
+    }
+
+    @PostMapping("forgotPassword")
+    public ResponseBody forgotPassword(@RequestBody ForgotPasswordRequest request) {
+        return authenticationService.
     }
 }

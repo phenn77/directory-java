@@ -3,16 +3,11 @@ package com.training.directory.service.impl;
 import com.training.directory.constant.Status;
 import com.training.directory.dao.ApiContext;
 import com.training.directory.dao.response.ResponseBody;
-import com.training.directory.exception.BusinessException;
-import com.training.directory.model.User;
 import com.training.directory.repository.UserRepository;
 import com.training.directory.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -21,9 +16,8 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class UserServiceImpl implements UserService {
-
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final UserRepository userRepository;
     private final ApiContext apiContext;
@@ -32,7 +26,7 @@ public class UserServiceImpl implements UserService {
     public UserDetailsService userDetailsService() {
         return username -> userRepository.findByUsername(username)
                 .orElseThrow(() -> {
-                    logger.error("User not found. Username: {}", username);
+                    log.error("User not found. Username: {}", username);
 
                     return new UsernameNotFoundException("User not found.");
                 });
