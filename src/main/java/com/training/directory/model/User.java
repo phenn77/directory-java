@@ -44,9 +44,6 @@ public class User extends BaseEntity implements UserDetails  {
     @NotNull
     private String password;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Image profilePicture;
-
     @Enumerated(EnumType.STRING)
     private Role role;
 

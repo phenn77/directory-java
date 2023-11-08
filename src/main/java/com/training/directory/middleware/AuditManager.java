@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.training.directory.dao.ApiContext;
 import com.training.directory.model.Audit;
 import com.training.directory.repository.AuditRepository;
-import com.training.directory.service.AuditService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.JoinPoint;
@@ -24,6 +23,7 @@ import java.util.Optional;
 @Log4j2
 @RequiredArgsConstructor
 public class AuditManager {
+//    https://medium.com/trendyol-tech/audit-log-approach-with-spring-aop-and-fluentbit-1df53840a9eb
 
     private final AuditRepository auditRepository;
     private final ApiContext apiContext;
@@ -47,7 +47,7 @@ public class AuditManager {
             var previousData = String.valueOf(auditLog.getPreviousData());
             var currentData = String.valueOf(auditLog.getCurrentData());
 
-//            auditLog.setRequest(gson.toJson(jp.getArgs()));
+            auditLog.setPayload(gson.toJson(jp.getArgs()));
             auditLog.setCurrentData(gson.toJson(dto));
             auditLog.setDifference(getDifference(previousData, currentData));
             auditLog.setUpdatedBy(apiContext.getUserId());

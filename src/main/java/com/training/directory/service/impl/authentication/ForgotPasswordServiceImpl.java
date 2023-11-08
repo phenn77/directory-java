@@ -8,7 +8,6 @@ import com.training.directory.repository.UserRepository;
 import com.training.directory.util.ApplicationUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -24,7 +23,7 @@ public class ForgotPasswordServiceImpl {
         var user = userRepository.findByUsernameOrEmail(request.username(), request.username());
 
         if (Objects.isNull(user)) {
-            log.error("User not found. Request: {}", request);
+            log.error("User not found. Request: {}", request.username());
 
             throw new BusinessException("User not found.");
         }
@@ -33,6 +32,6 @@ public class ForgotPasswordServiceImpl {
 
         userRepository.saveAndFlush(user);
 
-        return new ResponseBody(Status.SUCCESS, "Password changed successfully", ObjectUtils.NULL);
+        return new ResponseBody(Status.SUCCESS, "Password changed successfully", null);
     }
 }

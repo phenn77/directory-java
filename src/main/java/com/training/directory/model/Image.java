@@ -1,18 +1,29 @@
 package com.training.directory.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
+@Builder
 @Data
 @Entity
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Table(name = "image")
 public class Image extends BaseEntity {
 
     @NotNull
-    private String image;
+    @Lob
+    @JsonIgnore
+    private byte[] imageData;
+
+    @NotNull
+    private String filename;
+
+    @NotNull
+    private String type;
 
     @ManyToOne
     @JoinColumn(name = "artist_id")

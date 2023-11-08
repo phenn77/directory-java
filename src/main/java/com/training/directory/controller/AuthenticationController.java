@@ -30,6 +30,6 @@ public class AuthenticationController {
 
     @PostMapping("forgotPassword")
     public ResponseBody forgotPassword(@RequestBody ForgotPasswordRequest request) {
-        return authenticationService.
+        return authenticationService.forgotPassword(request);
     }
 }

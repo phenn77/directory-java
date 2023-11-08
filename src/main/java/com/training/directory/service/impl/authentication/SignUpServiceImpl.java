@@ -13,7 +13,6 @@ import com.training.directory.service.AuditService;
 import com.training.directory.util.ApplicationUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
@@ -55,9 +54,9 @@ public class SignUpServiceImpl {
                 HttpMethod.POST,
                 ModelType.USER,
                 data.getId(),
-                ObjectUtils.NULL,
+                null,
                 data);
 
-        return new ResponseBody(Status.SUCCESS, "User creation success.", ObjectUtils.NULL);
+        return new ResponseBody(Status.SUCCESS, "User creation success.", null);
     }
 }

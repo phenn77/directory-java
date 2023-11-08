@@ -9,6 +9,7 @@ import com.training.directory.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -40,7 +41,8 @@ public class SignInServiceImpl {
 
             return new ResponseBody(Status.SUCCESS, StringUtils.EMPTY, Map.of("token", token));
         } catch (AuthenticationException e) {
-            throw new BusinessException("User not found.");
+            log.error("Authentication Error. Error: {}", (Object) ExceptionUtils.getRootCauseStackTrace(e));
+            throw new BusinessException("Authentication Error");
         }
     }
 }
