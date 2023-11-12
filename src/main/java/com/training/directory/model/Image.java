@@ -15,8 +15,9 @@ import lombok.*;
 public class Image extends BaseEntity {
 
     @NotNull
-    @Lob
+//    @Lob
     @JsonIgnore
+    @Basic(fetch=FetchType.LAZY)
     private byte[] imageData;
 
     @NotNull
@@ -44,4 +45,26 @@ public class Image extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    private Boolean defaultImage;
+
+    public String getArtist() {
+        return artist.getId();
+    }
+
+    public String getMember() {
+        return member.getId();
+    }
+
+    public String getAlbum() {
+        return album.getId();
+    }
+
+    public String getSingle() {
+        return single.getId();
+    }
+
+    public String getUser() {
+        return user.getId();
+    }
 }

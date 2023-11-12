@@ -47,6 +47,9 @@ public class User extends BaseEntity implements UserDetails  {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToOne(mappedBy = "user")
+    private Image image;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
@@ -74,5 +77,9 @@ public class User extends BaseEntity implements UserDetails  {
     @Override
     public boolean isEnabled() {
         return Boolean.TRUE;
+    }
+
+    public String getImage() {
+        return image.getId();
     }
 }

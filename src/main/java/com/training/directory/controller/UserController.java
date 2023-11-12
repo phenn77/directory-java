@@ -4,9 +4,8 @@ import com.training.directory.annotation.Authorized;
 import com.training.directory.dao.response.ResponseBody;
 import com.training.directory.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,7 +16,13 @@ public class UserController {
 
     @Authorized
     @GetMapping("me")
-    public ResponseBody login() {
+    public ResponseBody me() {
         return userService.getProfile();
+    }
+
+    @Authorized
+    @PutMapping("edit")
+    public ResponseBody edit(@RequestParam(required = false, name = "image") MultipartFile image) {
+        return userService.editProfile(image);
     }
 }

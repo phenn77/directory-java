@@ -18,10 +18,10 @@ public class ImageController {
 
     @PostMapping("upload")
     public ResponseBody upload(
-            @RequestParam("image") MultipartFile file,
+            @RequestParam("image") MultipartFile image,
             @RequestParam("modelType") ModelType modelType,
             @RequestParam("modelId") String modelId) {
-        return imageService.upload(modelType, modelId, file);
+        return imageService.upload(modelType, modelId, image);
     }
 
     @GetMapping("info/{imageId}")

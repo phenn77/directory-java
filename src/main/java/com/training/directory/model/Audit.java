@@ -20,11 +20,11 @@ public class Audit extends BaseEntity {
 
     private String modelId;
 
-    private transient Object payload;
+    private String payload;
 
-    private transient Object previousData;
+    private String previousData;
 
-    private transient Object currentData;
+    private String currentData;
 
-    private transient Object difference;
+    private String difference;
 }
