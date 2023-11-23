@@ -4,10 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
+@Builder(toBuilder = true)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Data
 @Entity
 @Table(name = "social_media")
@@ -20,4 +22,8 @@ public class SocialMedia extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "artist_id")
     private Artist artist;
+
+    public String getArtist() {
+        return artist.getId();
+    }
 }

@@ -51,7 +51,8 @@ public class ImageServiceImpl implements ImageService {
                     return new BusinessException("Image not found.");
                 });
 
-        return ResponseEntity.status(HttpStatus.OK)
+        return ResponseEntity
+                .status(HttpStatus.OK)
                 .contentType(MediaType.valueOf(image.getType()))
                 .body(ImageUtil.decompressImage(image.getImageData()));
     }

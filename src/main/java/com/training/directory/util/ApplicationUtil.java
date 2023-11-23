@@ -5,6 +5,9 @@ import com.training.directory.exception.BusinessException;
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.http.HttpStatus;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+
 public class ApplicationUtil {
     public ApplicationUtil() {
     }
@@ -19,5 +22,11 @@ public class ApplicationUtil {
         if (BooleanUtils.isFalse(result.verified)) {
             throw new BusinessException(HttpStatus.UNAUTHORIZED, "Password not match.");
         }
+    }
+
+    public static String convertTime(String format, LocalDateTime date) {
+        var spf = new SimpleDateFormat(format);
+
+        return spf.format(date);
     }
 }

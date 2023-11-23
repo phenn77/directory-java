@@ -19,9 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Log4j2
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
     private final ApiContext apiContext;
     private final EditUserServiceImpl editUserService;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetailsService userDetailsService() {
